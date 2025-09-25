@@ -7,29 +7,8 @@
 Insurance AI Platform is a comprehensive AI-powered system designed to provide insights and support across multiple insurance operations.  
 It integrates chatbots, AI agents, document retrieval, SQL query handling, summarization, and knowledge graph querying to assist insurance professionals and customers efficiently.
 
-Insurance-AI-Platform/
-│
-├─ Data/
-│ ├─ insurance.db # SQLite database with sample insurance data
-│ └─ sample_policy.pdf # Sample health insurance policy document
-│
-├─ Modules/
-│ ├─ task1_chatbot.py # Chatbot module
-│ ├─ task2_ai_agent.py # AI Agent / Calculator module
-│ ├─ task3_rag_basic.py # Knowledge Retriever (RAG Basic) module
-│ ├─ task4_rag_memory.py # Policy Advisor (RAG Memory) module
-│ ├─ task5_sql_qa.py # SQL Query module
-│ ├─ task6_summarizer.py # Document Summarization module
-│ └─ task7_graph_qa.py # Graph QA module (Neo4j)
-│
-├─ SQL_DATA_CREATION/
-│ ├─ CreateDB.py # Script to create SQLite database tables
-│ └─ add_SQLdata.py # Script to populate sample data into database
-│
-├─ app.py # Streamlit main app
-├─ .env # Environment variables for database and APIs
-├─ requirements.txt # Python dependencies
-└─ README.md # Project documentation
+<img width="592" height="721" alt="image" src="https://github.com/user-attachments/assets/8f0346af-07c5-45d7-82c4-8053822c7b2e" />
+
 
 
 ---
