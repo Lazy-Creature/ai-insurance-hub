@@ -100,22 +100,27 @@ Notes:
 
 Example_Queries:
   Chatbot:
+  
     - "What does my health insurance policy cover?"
     - "How can I file a claim for car accident damages?"
     - "Explain the claim settlement process for hospitalization."
   Knowledge_Retriever:
+  
     - "Give details about the Sample Health Insurance Policy."
     - "What are the exclusions in my policy?"
     - "List the coverage details for outpatient medical consultations."
   Policy_Advisor:
+  
     - "Compare basic vs full coverage for car insurance."
     - "What benefits do I get if I opt for maternity coverage?"
     - "Suggest the best policy for frequent hospitalization needs."
   SQL_QA:
+  
     - "SELECT * FROM Customers WHERE age > 40;"
     - "How many claims were filed in 2024?"
     - "List all policies of type 'Health' with coverage 'Basic'."
   Summarization:
+  
     - "Summarize the Sample Health Insurance Policy."
     - "Give a brief overview of exclusions and claim process."
  
