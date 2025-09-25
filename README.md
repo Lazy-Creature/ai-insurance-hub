@@ -1,7 +1,12 @@
+# Insurance AI Platform
+
+**Project Type:** Group Project  
+**Contributors:** Dinesh Halder, Shakshi Bansal 
+**Description:** A multi-module insurance AI platform for querying, summarizing, and analyzing insurance policies, claims, and customer data using LLMs, SQL, and Neo4j.
 
 <img width="1920" height="1080" alt="Screenshot (41)" src="https://github.com/user-attachments/assets/04e52ec3-a9fd-4c7c-a88f-5f26580d453f" />
 
-# Insurance AI Platform
+
 
 ## Description
 Insurance AI Platform is a comprehensive AI-powered system designed to provide insights and support across multiple insurance operations.  
