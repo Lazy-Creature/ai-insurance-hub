@@ -1,0 +1,290 @@
+{
+  "name": "Insurance Alerts Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "insurance-alert",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -448,
+        -16
+      ],
+      "id": "2a407abf-9721-4a51-858c-55260e028a49",
+      "name": "Webhook",
+      "webhookId": "a955d2f3-1684-4435-ba59-95aad6d2efb1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0c2553cf-0fcf-42dc-a2d1-5fb051abc568",
+              "leftValue": "={{ $json['Claim Amount'] }}",
+              "rightValue": 500000,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        64,
+        -112
+      ],
+      "id": "00c8cdba-b997-4c9d-8537-d73ab0a04932",
+      "name": "High Claim Check"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "dc862722-5ec7-46dc-8eb8-49d46b921834",
+              "leftValue": "={{ $json['Fraud Score'] }}",
+              "rightValue": 80,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        64,
+        48
+      ],
+      "id": "8aebe07a-3eda-498c-9ef5-f188affa2b85",
+      "name": "Fraud Risk Check"
+    },
+    {
+      "parameters": {
+        "sendTo": "dineshhalder0003@gmail.com",
+        "subject": "⚠️ Fraud Risk Alert",
+        "message": "=Claim ID: {{ $('Append row in sheet').item.json['Claim ID'] }} has fraud score {{ $('Append row in sheet').item.json['Fraud Score'] }}. Immediate review required.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        272,
+        128
+      ],
+      "id": "56cb37a7-e777-4584-bf82-694d8e53de03",
+      "name": "Gmail Node for Fraud Alert",
+      "webhookId": "dcd4bc7d-5bb2-4f3c-9916-b409c9938e44",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "F9V6Ndh5sTRsveNI",
+          "name": "Gmail account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "dineshhalder0003@gmail.com",
+        "subject": "Allert!",
+        "message": "=Claim ID:{{ $('Append row in sheet').item.json['Claim ID'] }}  has amount ₹{{ $('Append row in sheet').item.json['Claim Amount'] }}. Please review.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        272,
+        -208
+      ],
+      "id": "4203df7e-1b66-4bf9-8a59-6711db13c293",
+      "name": "Alert for High Claim",
+      "webhookId": "dcd4bc7d-5bb2-4f3c-9916-b409c9938e44",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "F9V6Ndh5sTRsveNI",
+          "name": "Gmail account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1HhyotX0rKMWdRNyf5IiAF0v9xmplWGIqWj7dofc6njc",
+          "mode": "list",
+          "cachedResultName": "data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HhyotX0rKMWdRNyf5IiAF0v9xmplWGIqWj7dofc6njc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HhyotX0rKMWdRNyf5IiAF0v9xmplWGIqWj7dofc6njc/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Claim ID": "={{ $json.body.claim_id }}",
+            "Claim Amount": "={{ $json.body.claim_amount }}",
+            "Fraud Score": "={{ $json.body.fraud_score }}",
+            "Policy Expiry": "={{ $json.body.policy_expiry }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Claim ID",
+              "displayName": "Claim ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Claim Amount",
+              "displayName": "Claim Amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fraud Score",
+              "displayName": "Fraud Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Policy Expiry",
+              "displayName": "Policy Expiry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -224,
+        -16
+      ],
+      "id": "274c7db4-1560-4db2-bace-eac9ead2f65f",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PWHLOKI3cgustDec",
+          "name": "Google Sheets account 5"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "High Claim Check": {
+      "main": [
+        [
+          {
+            "node": "Alert for High Claim",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fraud Risk Check": {
+      "main": [
+        [
+          {
+            "node": "Gmail Node for Fraud Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "High Claim Check",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fraud Risk Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "aaef3990-a503-4d1e-bc0a-e88daebe9cde",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "586a703507f2a1b68603144edafed8c412d8e84e5019fd2d1a262677ac95e269"
+  },
+  "id": "6vmFXLxB8SzCqTiJ",
+  "tags": []
+}
