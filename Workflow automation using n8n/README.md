@@ -1,3 +1,7 @@
+![Screenshot 2025-10-07 180928](https://github.com/user-attachments/assets/3f89a361-a5ec-4940-9298-d0488fa7bc01)
+
+
+
 # Insurance Workflow Automation Project
 
 ## Overview
